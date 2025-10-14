@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "passcheck"
+version = "0.1.0"
+description = "A master’s-level yet beginner-friendly password strength checker (CLI · API · Web UI)."
+authors = [{name = "Your Name"}]
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = [
+  "fastapi>=0.110",
+  "uvicorn>=0.23",
+]
+keywords = ["password", "security", "entropy", "strength", "fastapi"]
+
+[project.optional-dependencies]
+dev = ["pytest>=7.0"]
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+packages = ["passcheck"]
+include-package-data = true
