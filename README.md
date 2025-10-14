@@ -53,4 +53,88 @@ This project demonstrates full-stack development and deployment — from Python 
 ---
 
 ## 🏗️ Architecture Overview
+User → Web UI (GitHub Pages)
+↓ Fetch API
+Backend (FastAPI on Render)
+↓
+Entropy + Rule Engine (Python)
+↓
+JSON Response to UI
+
+
+---
+
+## 🧪 Run Locally
+
+```bash
+# 1️⃣ Create & activate virtual environment
+python -m venv .venv
+source .venv/bin/activate      # Windows: .venv\Scripts\activate
+
+# 2️⃣ Install dependencies
+pip install -e .[dev]
+
+# 3️⃣ Run API
+uvicorn api.main:app --reload
+
+# 4️⃣ Open API docs
+http://127.0.0.1:8000/docs
+
+# 5️⃣ Launch Web UI
+Open web/index.html in your browser
+
+⚙️ CLI Mode
+python -m passcheck "P@ssw0rd123!" --json
+Returns:
+
+{
+  "strength": "Excellent",
+  "score": 100,
+  "entropy_bits_adjusted": 94.87,
+  "feedback": ["Avoid dictionary words or common phrases—even with l33t substitutions."]
+}
+
+API Reference
+| Method | Endpoint    | Description                    |
+| ------ | ----------- | ------------------------------ |
+| `POST` | `/evaluate` | Returns password strength JSON |
+| `GET`  | `/healthz`  | Health check endpoint          |
+| `GET`  | `/docs`     | Swagger documentation          |
+
+🧩 Project Structure
+
+password-strength-checker/
+├── api/
+│   └── main.py
+├── src/passcheck/
+│   ├── __init__.py
+│   ├── __main__.py
+│   ├── checks.py
+│   ├── entropy.py
+│   ├── feedback.py
+│   ├── score.py
+│   └── data/common_weak_passwords.txt
+├── tests/
+│   └── test_basic.py
+├── docs/
+│   ├── index.html
+│   └── app.js
+├── .github/workflows/ci.yml
+├── LICENSE
+├── README.md
+├── SECURITY.md
+├── pyproject.toml
+└── requirements.txt
+
+🌈 Future Enhancements
+
+🔍 Offline breached password lookup (k-anonymity model)
+
+🌐 Multi-language wordlists & keyboard patterns
+
+🧠 Advanced ML-based scoring (Markov / PCFG)
+
+🧩 Browser extension or VS Code plugin
+
+
 
