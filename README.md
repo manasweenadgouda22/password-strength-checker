@@ -136,5 +136,17 @@ password-strength-checker/
 
 🧩 Browser extension or VS Code plugin
 
+🙌 Credits
+
+Built with ❤️ by Manaswee Nadgouda
+
+If this repo helped or impressed you, consider ⭐ starring it — it helps!
+
+---
+
+🎯 You're now ready to present this like a **professional portfolio project.**
+
+Want me to now generate a **LinkedIn post caption + project thumbnail idea**? 😎
+
 
 
