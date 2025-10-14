@@ -7,4 +7,4 @@ starlette
 pytest
 click
 typing-extensions
-passcheck
+-e .
