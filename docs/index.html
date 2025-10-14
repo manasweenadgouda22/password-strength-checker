@@ -1,1 +1,39 @@
-
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Password Strength Checker</title>
+  <style>
+    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; background:#0b0b0c; color:#f1f1f1; margin:0; }
+    .container { max-width: 780px; margin: 40px auto; padding: 24px; background: #121214; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,.3); }
+    input { width: 100%; padding: 14px 16px; border-radius: 12px; border: 1px solid #2a2a2a; background: #1a1a1b; color: #f1f1f1; font-size: 16px; }
+    .meter { height: 12px; background: #222; border-radius: 8px; margin-top: 12px; overflow: hidden; }
+    .bar { height: 100%; width: 0%; background: linear-gradient(90deg,#ff4d4f,#fadb14,#52c41a); transition: width .3s ease; }
+    .row { display:flex; gap: 12px; align-items:center; }
+    .badge { padding: 4px 8px; border-radius: 999px; background:#222; font-size:12px; border:1px solid #2a2a2a;}
+    .card { background:#0f0f10; padding: 16px; border-radius: 12px; border:1px solid #1f1f21; margin-top: 16px;}
+    code { background:#1a1a1b; padding:2px 6px; border-radius:6px; border:1px solid #2a2a2a; }
+    a { color:#58a6ff; text-decoration:none; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Password Strength Checker</h1>
+    <p>Runs locally against your API (start it with <code>uvicorn api.main:app --reload</code>). Do not test real passwords.</p>
+    <input id="pw" type="text" placeholder="Type a password candidate..." autocomplete="off"/>
+    <div class="meter"><div id="bar" class="bar"></div></div>
+    <div class="row" style="margin-top:8px">
+      <span id="strength" class="badge">—</span>
+      <span id="score" class="badge">score: —</span>
+      <span id="entropy" class="badge">entropy: — bits</span>
+    </div>
+    <div class="card">
+      <h3>Feedback</h3>
+      <ul id="feedback"></ul>
+      <p style="opacity:.7">API: <code>POST /evaluate</code> at <code>http://127.0.0.1:8000</code></p>
+    </div>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
