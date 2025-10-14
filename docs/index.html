@@ -20,7 +20,7 @@
 <body>
   <div class="container">
     <h1>Password Strength Checker</h1>
-    <p>Runs locally against your API (start it with <code>uvicorn api.main:app --reload</code>). Do not test real passwords.</p>
+    <p>Runs against a cloud FastAPI backend. Do not test real passwords.</p>
     <input id="pw" type="text" placeholder="Type a password candidate..." autocomplete="off"/>
     <div class="meter"><div id="bar" class="bar"></div></div>
     <div class="row" style="margin-top:8px">
@@ -31,7 +31,12 @@
     <div class="card">
       <h3>Feedback</h3>
       <ul id="feedback"></ul>
-      <p style="opacity:.7">API: <code>POST /evaluate</code> at <code>http://127.0.0.1:8000</code></p>
+      <p style="opacity:.7">
+        API: <code>POST /evaluate</code> → 
+        <a href="https://password-strength-checker-1inv.onrender.com/docs" target="_blank">
+          https://password-strength-checker-1inv.onrender.com
+        </a>
+      </p>
     </div>
   </div>
   <script src="app.js"></script>
