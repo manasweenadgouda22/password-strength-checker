@@ -8,10 +8,12 @@ const feedback = document.getElementById('feedback');
 async function evaluate(p) {
   const res = await fetch('https://password-strength-checker-1inv.onrender.com/evaluate', {
     method: 'POST',
-    headers: {'Content-Type': 'application/json'},
+    headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ password: p })
   });
-
+  if (!res.ok) throw new Error('API not reachable');
+  return await res.json();
+} // ✅ THIS closing bracket was missing!
 
 let timer;
 pw.addEventListener('input', () => {
