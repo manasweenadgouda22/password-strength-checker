@@ -1,0 +1,10 @@
+fastapi
+uvicorn
+pydantic
+pydantic-core
+anyio
+starlette
+pytest
+click
+typing-extensions
+passcheck
