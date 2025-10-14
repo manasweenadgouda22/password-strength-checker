@@ -5,9 +5,19 @@ const score = document.getElementById('score');
 const entropy = document.getElementById('entropy');
 const feedback = document.getElementById('feedback');
 
-// ✅ Use live backend instead of localhost
+// ✅ Your API endpoint
 const API_URL = "https://password-strength-checker-1inv.onrender.com/evaluate";
 
+// ✅ Fallback strength mapping if API does not provide a label
+function getStrengthLabel(score) {
+  if (score < 25) return "Very Weak";
+  if (score < 50) return "Weak";
+  if (score < 70) return "Fair";
+  if (score < 85) return "Strong";
+  return "Excellent";
+}
+
+// ✅ Evaluate via API call
 async function evaluate(p) {
   const res = await fetch(API_URL, {
     method: 'POST',
@@ -34,12 +44,18 @@ pw.addEventListener('input', () => {
     }
     try {
       const data = await evaluate(val);
-      const pct = data.score;
+      const pct = data.score || 0;
+
+      // ✅ Set fallback label if strength is missing
+      const strengthLabel = data.strength || getStrengthLabel(pct);
+
+      // ✅ Apply updates to UI
       bar.style.width = pct + '%';
-      strength.textContent = data.strength;
-      score.textContent = 'score: ' + data.score;
-      entropy.textContent = 'entropy: ' + data.entropy_bits_adjusted.toFixed(2) + ' bits';
-      feedback.innerHTML = data.feedback.map(x => `<li>${x}</li>`).join('');
+      strength.textContent = strengthLabel;
+      score.textContent = 'score: ' + pct;
+      entropy.textContent = 'entropy: ' + (data.entropy_bits_adjusted?.toFixed(2) || 0) + ' bits';
+      feedback.innerHTML = (data.feedback || []).map(x => `<li>${x}</li>`).join('');
+
     } catch (_e) {
       strength.textContent = 'API offline';
       bar.style.width = '0%';
