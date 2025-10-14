@@ -6,14 +6,12 @@ const entropy = document.getElementById('entropy');
 const feedback = document.getElementById('feedback');
 
 async function evaluate(p) {
-  const res = await fetch('http://127.0.0.1:8000/evaluate', {
+  const res = await fetch('https://password-strength-checker-1inv.onrender.com/evaluate', {
     method: 'POST',
     headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify({password: p})
+    body: JSON.stringify({ password: p })
   });
-  if (!res.ok) throw new Error('API not reachable. Is it running?');
-  return await res.json();
-}
+
 
 let timer;
 pw.addEventListener('input', () => {
