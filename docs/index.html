@@ -6,173 +6,116 @@
   <title>Password Strength Checker</title>
   <style>
     body {
-  font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
-  background: url("./bg.png") no-repeat center center fixed; /* 👈 Keep your image */
-  background-size: cover;
-  margin: 0;
-  display: flex;              /* ✅ Enables flexbox */
-  justify-content: center;    /* ✅ Centers horizontally */
-  align-items: center;        /* ✅ Centers vertically */
-  min-height: 100vh;          /* ✅ Full viewport height */
-}
-
-.container {
-  max-width: 780px;
-  padding: 24px;
-  background: rgba(0,0,0,0.85); /* Slight transparency looks premium */
-  border-radius: 16px;
-  box-shadow: 0 10px 30px rgba(0,0,0,.5);
-  backdrop-filter: blur(6px); /* 🔥 Glassmorphism effect */
-}
-
-
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      margin: 0;
+      background: url('https://i.ibb.co/hM6N2wq/cyber-grid-dark.png') center/cover no-repeat fixed;
+      color: #e0f7ff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      backdrop-filter: blur(4px);
+    }
 
     .container {
       width: 90%;
       max-width: 780px;
-      padding: 30px;
-      background: rgba(18, 18, 20, 0.9);
-      backdrop-filter: blur(12px);
+      padding: 24px;
+      background: rgba(10, 14, 20, 0.85);
       border-radius: 16px;
-      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(80, 200, 120, 0.1);
-      border: 1px solid rgba(60, 60, 60, 0.4);
-      animation: fadeIn 0.6s ease-in-out;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
+      box-shadow: 0 0 20px rgba(0, 157, 255, 0.4);
+      border: 1px solid rgba(0, 157, 255, 0.3);
+      text-align: center;
     }
 
     h1 {
-      text-align: center;
-      font-weight: 600;
-      margin-bottom: 20px;
-      color: #9ae6b4;
-      text-shadow: 0 0 8px rgba(154, 230, 180, 0.4);
+      font-size: 26px;
+      color: #66d9ff;
+      text-shadow: 0 0 10px #00aaff;
     }
 
     .status {
-      text-align: center;
-      font-size: 14px;
-      margin-bottom: 12px;
-      opacity: 0.8;
-    }
-
-    .status span {
-      font-weight: bold;
-      color: #4ade80;
+      margin-bottom: 16px;
+      color: #66d9ff;
+      font-weight: 500;
+      text-shadow: 0 0 8px #009dff;
     }
 
     input {
       width: 100%;
-      padding: 14px 16px;
+      padding: 14px;
       border-radius: 12px;
-      border: 1px solid #2a2a2a;
-      background: #1a1a1b;
-      color: #f1f1f1;
+      border: 1px solid #0077b6;
+      background: #0a0f14;
+      color: #e0f7ff;
       font-size: 16px;
-      transition: box-shadow 0.3s ease;
-    }
-
-    input:focus {
-      outline: none;
-      box-shadow: 0 0 12px rgba(56, 189, 248, 0.4);
+      box-shadow: 0 0 8px rgba(0, 157, 255, 0.2);
     }
 
     .meter {
-      height: 14px;
-      background: #222;
+      height: 12px;
+      background: #06202e;
       border-radius: 8px;
       margin-top: 12px;
       overflow: hidden;
+      border: 1px solid #009dff;
     }
 
     .bar {
       height: 100%;
       width: 0%;
-      background: linear-gradient(90deg, #e11d48, #facc15, #4ade80);
-      transition: width .4s ease;
-    }
-
-    .row {
-      display: flex;
-      gap: 12px;
-      align-items: center;
-      margin-top: 8px;
-      justify-content: space-between;
+      background: linear-gradient(90deg, #009dff, #00ffaa);
+      transition: width .3s ease;
+      box-shadow: 0 0 8px rgba(0, 255, 255, 0.6);
     }
 
     .badge {
-      padding: 6px 10px;
+      padding: 4px 10px;
       border-radius: 999px;
-      background: #1f2937;
+      border: 1px solid #0077b6;
       font-size: 12px;
-      border: 1px solid #374151;
-      min-width: 90px;
-      text-align: center;
-    }
-
-    .card {
-      background: #111213;
-      padding: 18px;
-      border-radius: 12px;
-      border: 1px solid #1f1f21;
-      margin-top: 16px;
+      color: #66d9ff;
+      background: rgba(0, 157, 255, 0.1);
+      text-shadow: 0 0 6px #009dff;
     }
 
     .footer {
-      text-align: center;
+      font-size: 12px;
       margin-top: 20px;
-      font-size: 13px;
-      opacity: 0.6;
+      opacity: 0.8;
+      color: #66d9ff;
+      text-shadow: 0 0 4px #009dff;
     }
 
-    .footer a {
-      color: #58a6ff;
+    a {
+      color: #4be3ff;
       text-decoration: none;
-      margin: 0 6px;
-      border-bottom: 1px dotted #58a6ff;
+      text-shadow: 0 0 5px #00cfff;
     }
   </style>
 </head>
 <body>
   <div class="container">
     <h1>🔐 Password Strength Checker</h1>
-    <div class="status">API Status: <span id="api-status">Checking...</span></div>
-
-    <input id="pw" type="text" placeholder="Type a password..." autocomplete="off" />
+    <p class="status">API Status: 🔵 Live</p>
+    <input id="pw" type="text" placeholder="Type a password..." autocomplete="off"/>
     <div class="meter"><div id="bar" class="bar"></div></div>
-
-    <div class="row">
+    
+    <div style="margin-top:10px;">
       <span id="strength" class="badge">—</span>
       <span id="score" class="badge">score: —</span>
       <span id="entropy" class="badge">entropy: — bits</span>
     </div>
 
-    <div class="card">
-      <h3>💡 Suggestions</h3>
-      <ul id="feedback"></ul>
-      <p style="opacity:.7; margin-top:10px;">
-        API: <code>POST /evaluate</code> → 
-        <a href="https://password-strength-checker-1inv.onrender.com/docs" target="_blank">
-          API Docs (Swagger UI)
-        </a>
-      </p>
-    </div>
+    <h3 style="margin-top:20px; color:#4be3ff; text-shadow:0 0 6px #00cfff;">💡 Suggestions</h3>
+    <ul id="feedback" style="list-style:none; padding:0;"></ul>
 
     <div class="footer">
-      Built with ❤️ using FastAPI + Render + GitHub Pages — 
-      <a href="https://github.com/manasweenadgouda22" target="_blank">GitHub Profile</a>
+      ⚡ Deployed on Render | 🔐 Secured by FastAPI | 🌐 Hosted via GitHub Pages  
+      — <a href="https://github.com/manasweenadgouda22" target="_blank">GitHub Profile</a>
     </div>
   </div>
 
   <script src="app.js"></script>
-  <script>
-    // Ping API to show status indicator
-    fetch('https://password-strength-checker-1inv.onrender.com/healthz')
-      .then(() => document.getElementById('api-status').textContent = "✅ Live")
-      .catch(() => document.getElementById('api-status').textContent = "❌ Offline");
-  </script>
 </body>
 </html>
